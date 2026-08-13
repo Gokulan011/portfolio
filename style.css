@@ -3277,3 +3277,13 @@
       }
 
     }  
+  @media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+
+  #cursor,
+  #cursor-ring {
+    display: none !important;
+  }
+}
