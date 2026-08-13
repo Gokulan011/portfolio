@@ -383,15 +383,63 @@
                         style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;margin-bottom:24px;color:var(--text2)">
                         Education</h3>
                     <div class="timeline">
+
+                        <!-- Degree -->
                         <div class="timeline-item">
-                            <div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="timeline-dot">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+
                             <div class="timeline-content">
                                 <div class="timeline-year">2022 — 2025</div>
                                 <div class="timeline-title">B.Sc Computer Science</div>
                                 <div class="timeline-sub">Bharathidasan University</div>
-                                <div class="timeline-badge"><i class="fa-solid fa-star"></i> CGPA: 7.68</div>
+                                <div class="timeline-badge">
+                                    <i class="fa-solid fa-star"></i> CGPA : 7.68
+                                </div>
                             </div>
                         </div>
+
+                        <!-- 12th -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot">
+                                <i class="fa-solid fa-school"></i>
+                            </div>
+
+                            <div class="timeline-content">
+                                <div class="timeline-year">2021 — 2022</div>
+                                <div class="timeline-title">
+                                    Higher Secondary Certificate (HSC)
+                                </div>
+                                <div class="timeline-sub">
+                                    R C Town Higher Secondary School - Kodaikanal
+                                </div>
+                                <div class="timeline-badge">
+                                    <i class="fa-solid fa-award"></i> 68.6%
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10th -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+
+                            <div class="timeline-content">
+                                <div class="timeline-year">2019 — 2020</div>
+                                <div class="timeline-title">
+                                    Secondary School Leaving Certificate (SSLC)
+                                </div>
+                                <div class="timeline-sub">
+                                    R C Town Higher Secondary School - Kodaikanal
+                                </div>
+                                <div class="timeline-badge">
+                                    <i class="fa-solid fa-award"></i> 96.6%
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="soft-skills" style="margin-top:40px">
                         <h3>Soft Skills</h3>
@@ -653,79 +701,77 @@
             .addEventListener("submit", submitForm);
 
         function submitForm(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    const fname = document.getElementById("fname").value.trim();
-    const lname = document.getElementById("lname").value.trim();
-    const femail = document.getElementById("femail").value.trim();
-    const fsubject = document.getElementById("fsubject").value.trim();
-    const fmessage = document.getElementById("fmessage").value.trim();
+            const fname = document.getElementById("fname").value.trim();
+            const lname = document.getElementById("lname").value.trim();
+            const femail = document.getElementById("femail").value.trim();
+            const fsubject = document.getElementById("fsubject").value.trim();
+            const fmessage = document.getElementById("fmessage").value.trim();
 
-    if (!fname || !femail || !fmessage) {
-        alert("Please fill in First Name, Email and Message.");
-        return;
-    }
+            if (!fname || !femail || !fmessage) {
+                alert("Please fill in First Name, Email and Message.");
+                return;
+            }
 
-    const btn = document.querySelector(".form-submit");
-    const success = document.getElementById("form-success");
+            const btn = document.querySelector(".form-submit");
+            const success = document.getElementById("form-success");
 
-    btn.disabled = true;
-    btn.innerHTML = `
+            btn.disabled = true;
+            btn.innerHTML = `
         <i class="fa-solid fa-spinner fa-spin"></i> Sending...
     `;
 
-    const templateParams = {
-        from_name: `${fname} ${lname}`.trim(),
-        from_email: femail,
-        subject: fsubject || "Portfolio Contact",
-        message: fmessage
-    };
+            const templateParams = {
+                from_name: `${fname} ${lname}`.trim(),
+                from_email: femail,
+                subject: fsubject || "Portfolio Contact",
+                message: fmessage
+            };
 
-    console.log("Sending EmailJS:", templateParams);
+            console.log("Sending EmailJS:", templateParams);
 
-    emailjs
-        .send(
-            "service_6p1ta0c",
-            "template_yofusu8",
-            templateParams
-        )
-        .then((response) => {
-            console.log("EmailJS SUCCESS:", response);
+            emailjs
+                .send(
+                    "service_6p1ta0c",
+                    "template_yofusu8",
+                    templateParams
+                )
+                .then((response) => {
+                    console.log("EmailJS SUCCESS:", response);
 
-            success.style.display = "block";
-            document.getElementById("contact-form").reset();
+                    success.style.display = "block";
+                    document.getElementById("contact-form").reset();
 
-            btn.disabled = false;
-            btn.innerHTML = `
+                    btn.disabled = false;
+                    btn.innerHTML = `
                 <i class="fa-solid fa-circle-check"></i> Message Sent
             `;
 
-            setTimeout(() => {
-                btn.innerHTML = `
+                    setTimeout(() => {
+                        btn.innerHTML = `
                     <i class="fa-solid fa-paper-plane"></i> Send Message
                 `;
-                success.style.display = "none";
-            }, 4000);
-        })
-        .catch((error) => {
-            console.error("EmailJS ERROR:", error);
-            console.error("Status:", error?.status);
-            console.error("Text:", error?.text);
+                        success.style.display = "none";
+                    }, 4000);
+                })
+                .catch((error) => {
+                    console.error("EmailJS ERROR:", error);
+                    console.error("Status:", error?.status);
+                    console.error("Text:", error?.text);
 
-            btn.disabled = false;
-            btn.innerHTML = `
+                    btn.disabled = false;
+                    btn.innerHTML = `
                 <i class="fa-solid fa-paper-plane"></i> Send Message
             `;
 
-            alert(
-                `Failed to send message.\n\nStatus: ${
-                    error?.status || "Unknown"
-                }\nMessage: ${
-                    error?.text || error?.message || "Unknown error"
-                }`
-            );
-        });
-}
+                    alert(
+                        `Failed to send message.\n\nStatus: ${error?.status || "Unknown"
+                        }\nMessage: ${error?.text || error?.message || "Unknown error"
+                        }`
+                    );
+                });
+        }
         /* ============================
            DOWNLOAD RESUME (placeholder)
            ============================ */
